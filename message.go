@@ -82,7 +82,7 @@ func (msg *Message) writeAttachment(buf *bytes.Buffer, attachment Attachment) {
 	buf.WriteString("--MixedBoundaryString\r\n")
 	buf.WriteString(fmt.Sprintf("Content-Type: %s;name=\"%s\"\r\n", attachment.ContentType(), attachment.Filename()))
 	buf.WriteString("Content-Transfer-Encoding: base64\r\n")
-	buf.WriteString(fmt.Sprintf("Content-Disposition: attachment;filename=\"%s\"\r\n", attachment.Filename()))
+	buf.WriteString(fmt.Sprintf("Content-Disposition: attachment;filename=\"%s\"\r\n\r\n", attachment.Filename()))
 
 	encodedData := make([]byte, base64.StdEncoding.EncodedLen(len(data)))
 	base64.StdEncoding.Encode(encodedData, data)
